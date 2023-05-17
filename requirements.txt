@@ -5,4 +5,5 @@ daphne
 psycopg2
 gunicorn
 whitenoise
-uvicorn
+Twisted
+httpx[http2]
