@@ -5,3 +5,4 @@ daphne
 psycopg2
 gunicorn
 whitenoise
+uvicorn
