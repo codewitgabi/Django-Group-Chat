@@ -1,1 +1,1 @@
-web: python manage.py migrate && daphne Chat.asgi:application
+web: python manage.py migrate && gunicorn Chat.wsgi
