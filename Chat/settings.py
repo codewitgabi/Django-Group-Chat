@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+import os
 from .ip_address import get_ip_address
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
