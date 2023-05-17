@@ -1,4 +1,6 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
+import django
+django.setup()
 from channels.db import database_sync_to_async
 from main.models import Group
 import json
