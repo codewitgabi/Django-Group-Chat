@@ -1,1 +1,1 @@
-web: python manage.py migrate && python -m gunicorn Chat.asgi:application -k uvicorn.workers.UvicornWorker
+web: python manage.py migrate && daphne Chat.asgi:application
