@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %} DjangoGroupChat {% endblock title %}
+
+{% block content %}
+
+    <div class="row">
+    
+        <div class="col flex-0">
+            <h2 class="mb-1">Group Filter</h2>
+            <hr class="mb-1">
+            <a href="{% url 'index' %}" class="btn-link-b">All ({{ groups.count }})</a>
+            {% for category in categories reversed %}
+                <a href="{% url 'index' %}?cat={{ category }}" class="btn-link-b">{{ category }} ({{ category.num_groups }})</a>
+            {% endfor %}
+        </div>
+        
+        <div class="col flex-1">
+            <h2 class="mb-1">Groups</h2>
+            <hr class="mb-1">
+            
+            {% for group in groups %}
+            <div class="group-wrapper">
+                <h3>{{ group }}</h3>
+                <p>
+                    {{ group.description|truncatewords:15 }}
+                </p>
+                {% if not request.user in group.participants.all %}
+                <a href="{% url 'join_group' group.id %}" class="btn-link-bl">Join</a>
+                {% else %}
+                <a href="{% url 'view_chat' group.id %}" class="btn-link-bl">Go In</a>
+                {% endif %}
+            </div>
+            {% empty %}
+            	<h3 align="center">Groups associated with given category does not exist!!!</h3>
+            {% endfor %}
+            
+        </div>
+    </div>
+    
+{% endblock content %}

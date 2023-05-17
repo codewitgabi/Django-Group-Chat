@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %} Create Group {% endblock title %}
+
+{% block content %}
+
+    <h2>Create Group</h2>
+    <div class="rm-mrg">
+        <form action="" id="create-form" method="post">
+        {% csrf_token %}
+            <input type="text" name="name" placeholder="Name of Group..." required>
+            <input type="text" placeholder="Category" list="categories" name="category" required>
+            <datalist id="categories">
+                <select>
+                    {% for cat in categories %}
+                        <option value="{{ cat }}">{{ cat }}</option>
+                    {% endfor %}
+                </select>
+            </datalist>
+            <textarea name="description" placeholder="Description"></textarea>
+            <button class="btn-link-b">Create</button>
+        </form>
+    </div>
+
+{% endblock content %}

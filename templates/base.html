@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock title %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        nav {
+            background: #27282c;
+            color: #fff;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em 10%;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .search-form {
+            background: #f2f2f2;
+            padding: 12px;
+            border-radius: 50px;
+        }
+        .search-form input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: none;
+        }
+        .nav-links ul {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+        }
+        .nav-links ul li {
+            list-style: none;
+        }
+        .btn-link {
+            background: yellow;
+            color: black;
+            padding: 0.5em 1em;
+            border-radius: 50px;
+        }
+        .row {
+            display: flex;
+            gap: 2em;
+        }
+        .btn-link-b,
+        .btn-link-bl {
+            background: blue;
+            text-decoration: none;
+            color: #fff;
+            padding: 0.5em 1.3em;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 0.2em 0.4em;
+        }
+        .btn-link-bl {
+            background: #27282c;
+            margin: 0.5em 0.5em;
+            margin-left: 0;
+            border-radius: 0;
+        }
+        .container {
+            margin: 2em 15%;
+        }
+        .mb-1 {
+            margin-bottom: 1em;
+        }
+        .flex-0 {
+            flex: 0.5;
+        }
+        .flex-1 {
+            flex: 1;
+        }
+        .group-wrapper {
+            box-shadow: hsl(0,0%,80%) 0 0 5px;
+            padding: 1em;
+            line-height: 1.5em;
+            margin-bottom: 1em;
+        }
+        .sender {
+            background: #f2bad5;
+            padding: 10px;
+            width: 80%;
+            float: right;
+	    clear: both;
+            line-height: 1.5em;
+            margin: 5px 0;
+        }
+        .receiver {
+            background: #bed1fc;
+            padding: 10px;
+            width: 80%;
+	    float: left;
+            clear: both;
+            line-height: 1.5em;
+            margin: 5px 0;
+        }
+        #chat-form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            clear: both;
+        }
+        #chat-form textarea {
+            background: #f2f2f2;
+            border: none;
+            outline: none;
+            padding: 12px;
+            width: 100%;
+            height: 40px;
+        }
+        #chat-form button {
+            background: #27282c;
+            color: #fff;
+            padding: 10px;
+            border: 1px solid orange;
+        }
+        #create-form input, textarea {
+            width: 100%;
+            padding: 12px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        textarea {
+            height: 100px;
+        }
+        
+        @media only screen and (max-width: 650px) {
+            nav a {
+                font-size: 0.7rem;
+            }
+            .search-form {
+                position: absolute;
+                top: 3.7em;
+                left: 1em;
+                right: 1em;
+            }
+            .container {
+                margin: 4em 1em 1em 1em;
+            }
+            .mb-1 {
+                margin-bottom: 0.5em;
+            }
+            .row {
+                flex-direction: column;
+            }
+            .rm-mrg {
+                margin-top: -2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'index' %}">GroupChat-Django</a>
+        
+        {% if not remove_nav %}
+        <div class="search-form">
+            <form action="">
+                <input type="search" name="search" placeholder="Search Group..." autocapitalize="off">
+            </form>
+        </div>
+        {% endif %}
+        
+        <div class="nav-links">
+            <ul>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+            	<li><a href="{% url 'signin' %}">Sign In</a></li>
+            {% endif %}
+                <li><a href="{% url 'create_group' %}" class="btn-link">Create Group</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
+</body>
+</html>

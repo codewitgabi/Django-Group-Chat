@@ -1,0 +1,5 @@
+Django==3.2
+channels["daphne"]
+psycopg2
+gunicorn
+whitenoise
