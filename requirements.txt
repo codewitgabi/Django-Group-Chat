@@ -1,5 +1,7 @@
 Django==3.2
-channels["daphne"]
+channels
+channels_redis
+daphne
 psycopg2
 gunicorn
 whitenoise
