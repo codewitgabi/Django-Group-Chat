@@ -7,14 +7,14 @@ from .ip_address import get_ip_address
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = "kznsh7w6y2bejsksow982bbsbsidneo2826w728e738ensizhsnsksow72y2vsksosowwj"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost",]
+ALLOWED_HOSTS = ["localhost", "chat-group.up.railway.app"]
 
-CSRF_TRUSTED_ORIGINS = [f"http://{get_ip_address()}"]
+CSRF_TRUSTED_ORIGINS = ["https://chat-group.up.railway.app"]
 
 
 # Application definition
@@ -125,10 +125,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = [
-	"http://localhost",
-	"https://chat-group.up.railway.app",
-]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -140,7 +137,7 @@ CHANNEL_LAYERS = {
 		"BACKEND": "channels_redis.core.RedisChannelLayer",
 		"CONFIG": {
 			"hosts": [
-				(os.environ.get("REDIS_HOST"))
+				os.environ.get("REDIS_HOST")
 			]
 		}
 	}
