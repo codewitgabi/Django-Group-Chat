@@ -77,7 +77,7 @@ DATABASES = {
 		"HOST": os.environ.get("PG_HOST"),
 		"PORT": os.environ.get("PG_PORT"),
 	}
-#}
+}
 
 #DATABASES = {
 #	"default": {
