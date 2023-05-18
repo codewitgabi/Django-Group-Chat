@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Group, Category
+from .models import Group, Category, Message
 
 
 class GroupAdmin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ class GroupAdmin(admin.ModelAdmin):
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Category)
+admin.site.register(Message)

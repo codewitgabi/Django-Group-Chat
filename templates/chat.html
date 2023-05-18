@@ -49,7 +49,7 @@
     	const form = document.querySelector("#chat-form");
     	const group_id = "{{ group.id }}";
     	const user = "{{ request.user }}";
-    	const ws_url = `ws://${window.location.host}/chat/${group_id}/`;
+    	const ws_url = `wss://${window.location.host}/chat/${group_id}/`;
     	const messageBox = document.querySelector("#chat-messages");
     	
     	const chat_socket = new WebSocket(ws_url);
