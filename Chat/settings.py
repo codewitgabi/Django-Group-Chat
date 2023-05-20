@@ -10,11 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "") != "False"
 
-ALLOWED_HOSTS = ["*"]
-
-CSRF_TRUSTED_ORIGINS = ["*"]
+ALLOWED_HOSTS = ["chat-group.up.railway.app"]
 
 
 # Application definition
@@ -131,10 +129,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = [
-	"http://localhost",
-	"https://chat-group.up.railway.app",
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -146,7 +140,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [(os.environ.get("REDIS_HOST"))],
+            "hosts": [(os.environ.get("REDIS_HOST", "redis://localhost"))],
         },
     },
 }
