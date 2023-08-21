@@ -1,91 +1,31 @@
 {% extends "base.html" %}
-{% block title %} {% endblock title %}
+{% load static %}
+{% block title %} {{ group }} | Chat {% endblock title %}
 
 {% block content %}
-	<div class="rm-mrg">
+  <div class="rm-mrg">
     <h2>{{ group }}</h2>
     <small>{{ group.description }}</small><br>
     <div class="participants">
-        <span>Participants -> </span>
-        <span>{{ group.participants.count }}</span>
+      <span>Participants -> </span>
+      <span>{{ group.participants.count }}</span>
     </div>
     <br>
     <hr>
-    <div class="chat-messages" id="chat-messages">
-    <!--
-    {% for message in messages %}
-        {% if message.sender == request.user %}
-        <div class="sender">
-            <p>
-                {{ message }}
-            </p>
-            <small class="date-sent">{{ message.time_created|date:"M j, y g:i a" }}</small>
-        </div>
-       {% else %}
-        <div class="receiver">
-            <h4 class="username">@{{ message.sender }}</h4>
-            <p>
-                {{ message }}
-            </p>
-            <small class="date-sent">{{ message.time_created|date:"M j, y g:i a" }}</small>
-        </div>
-        {% endif %}
-        {% empty %}
-        	<br>
-        	<h3 align="center">Start a conversation!</h3>
-        	<br>
-    {% endfor %}
-    -->
-    </div>
-
-    <form action="" id="chat-form" method="post">
-    {% csrf_token %}
-        <textarea name="message" required placeholder="Type Message..."></textarea>
-        <button>Send</button>
-    </form>
-    </div>
+    <div class="chat-messages" id="chat-messages"></div>
     
-    <script>
-    	const form = document.querySelector("#chat-form");
-    	const group_id = "{{ group.id }}";
-    	const user = "{{ request.user }}";
-    	const ws_url = `wss://${window.location.host}/chat/${group_id}/`;
-    	const messageBox = document.querySelector("#chat-messages");
-    	
-    	const chat_socket = new WebSocket(ws_url);
-    	
-    	chat_socket.onmessage = (e) => {
-    		const data = JSON.parse(e.data);
-    		let output = "";
-    		
-    		if (data.type === "group_messages") {
-    			const messages = data.messages;
-    			for (let message of messages) {
-    				output += (message.sender === user) ? 
-    				`<div class="sender">
-    					<p>${message.message}</p>
-    					<small class="date-sent">${ new Date(message.time_created).toDateString() }</small>
-    				</div>` :
-    				`<div class="receiver">
-    					<h4 class="username">@${ message.sender }</h4>
-    					<p>${ message.message }</p>
-    					<small class="date-sent">${ new Date(message.time_created).toDateString() }</small>
-    				</div>`
-    			}
-    			messageBox.innerHTML = output;
-    		}
-    	}
-    	
-    	form.addEventListener("submit", (e) => {
-    		e.preventDefault();
-    		const message = e.target.message.value;
-    		
-    		chat_socket.send(JSON.stringify({
-    			"message": message
-    		}))
-    		
-    		form.reset();
-    	})
-    </script>
+    <form action="" id="chat-form" method="post">
+      {% csrf_token %}
+      <textarea name="message" required placeholder="Type Message..."></textarea>
+      <button>Send</button>
+    </form>
+  </div>
+    
+  <script>
+    const group_id = "{{ group.id }}";
+    const user = "{{ request.user }}";
+  </script>
+    
+  <script src="{% static 'chat.js' %}"></script>
 
 {% endblock content %}
