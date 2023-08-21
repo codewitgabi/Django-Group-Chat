@@ -1,7 +1,7 @@
 from pathlib import Path
 import sys
 import os
-from .ip_address import get_ip_address
+#from .ip_address import get_ip_address
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,13 +12,12 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "") != "False"
 
-ALLOWED_HOSTS = ["chat-group.up.railway.app"]
+ALLOWED_HOSTS = ["chat-group.up.railway.app", "localhost"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "daphne",
     "whitenoise.runserver_nostatic",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,7 +63,6 @@ WSGI_APPLICATION = 'Chat.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
 	"default": {
@@ -85,7 +83,6 @@ DATABASES = {
 #}
 
 # Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -104,7 +101,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -117,13 +113,13 @@ USE_L10N = True
 USE_TZ = True
 
 TIME_INPUT_FORMATS = ('%I:%M %p',)
-DATE_INPUT_FORMATS = ("%Y-%m-%d")
+DATE_INPUT_FORMATS = ("%Y-%m-%d",)
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 
@@ -131,7 +127,6 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

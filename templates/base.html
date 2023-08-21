@@ -18,7 +18,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1em 10%;
+            padding: 2em 10%;
         }
         nav a {
             color: #fff;
@@ -27,7 +27,7 @@
         .search-form {
             background: #f2f2f2;
             padding: 12px;
-            border-radius: 50px;
+            border-radius: 10px;
         }
         .search-form input {
             width: 100%;
@@ -46,8 +46,10 @@
         .btn-link {
             background: yellow;
             color: black;
-            padding: 0.5em 1em;
-            border-radius: 50px;
+            padding: 10px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-size: 0.6rem;
         }
         .row {
             display: flex;
@@ -55,19 +57,26 @@
         }
         .btn-link-b,
         .btn-link-bl {
-            background: blue;
-            text-decoration: none;
-            color: #fff;
-            padding: 0.5em 1.3em;
-            border-radius: 50px;
-            display: inline-block;
-            margin: 0.2em 0.4em;
+          background: blue;
+          text-decoration: none;
+          color: #fff;
+          padding: 10px 35px;
+          border-radius: 5px;
+          display: inline-block;
+          border: none;
+          margin: 0.2em 0.4em;
+          font-size: 0.95rem;
+          transition: all .4s;
         }
         .btn-link-bl {
-            background: #27282c;
-            margin: 0.5em 0.5em;
-            margin-left: 0;
-            border-radius: 0;
+          background: #27282c;
+          margin: 0.5em 0.5em;
+          margin-left: 0;
+          border-radius: 0;
+        }
+        .btn-link-b:hover,
+        .btn-link-bl:hover {
+          outline: 4px solid rgba(0,0,255,.2);
         }
         .container {
             margin: 2em 15%;
@@ -92,7 +101,7 @@
             padding: 10px;
             width: 80%;
             float: right;
-	    clear: both;
+            clear: both;
             line-height: 1.5em;
             margin: 5px 0;
         }
@@ -100,7 +109,7 @@
             background: #bed1fc;
             padding: 10px;
             width: 80%;
-	    float: left;
+      	    float: left;
             clear: both;
             line-height: 1.5em;
             margin: 5px 0;
@@ -136,12 +145,15 @@
         }
         
         @media only screen and (max-width: 650px) {
+          nav {
+            padding: 2em 1em;
+          }
             nav a {
                 font-size: 0.7rem;
             }
             .search-form {
                 position: absolute;
-                top: 3.7em;
+                top: 5.5em;
                 left: 1em;
                 right: 1em;
             }
