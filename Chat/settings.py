@@ -13,8 +13,17 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "") != "False"
 
-ALLOWED_HOSTS = ["chat-group.up.railway.app", "localhost"]
+ALLOWED_HOSTS = [
+    "chat-group.up.railway.app",
+    "group-learn.onrender.com",
+    "localhost"
+]
 
+SESSION_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost",
+    "https://group-learn.onrender.com"
+]
 
 # Application definition
 
