@@ -1,6 +1,7 @@
 from pathlib import Path
 import sys
 import os
+import dj_database_url
 #from .ip_address import get_ip_address
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -63,7 +64,7 @@ WSGI_APPLICATION = 'Chat.wsgi.application'
 
 
 # Database
-
+"""
 DATABASES = {
 	"default": {
 		"ENGINE": "django.db.backends.postgresql",
@@ -73,6 +74,15 @@ DATABASES = {
 		"HOST": os.environ.get("PG_HOST"),
 		"PORT": os.environ.get("PG_PORT"),
 	}
+}
+"""
+
+DATABASES = {
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+        conn_health_checks=True,
+    ),
 }
 
 #DATABASES = {
