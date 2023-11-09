@@ -22,7 +22,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install Requirements
-        run: "python3 -m pip3 install black && python3 -m black --check ."
+        run: "pip3 install black && python3 -m black --check ."
 
       - name: Done
         run: echo Done
