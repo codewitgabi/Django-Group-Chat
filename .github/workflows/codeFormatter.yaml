@@ -1,0 +1,29 @@
+name: Code Formatter
+run-name: Check code format
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - "*"
+  pull_request:
+    branches:
+      - dev
+      - "*"
+
+jobs:
+  code_formatting_review:
+    name: Code Formatting Review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Python3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Requirements
+        run: "pip3 install black && python3 -m black --check ."
+
+      - name: Done
+        run: echo Done
+
