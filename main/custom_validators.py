@@ -8,15 +8,15 @@ class PasswordCombinationValidator:
                                   code="no lowercase",
                                   )
         if password.islower() == True:
-            raise ValidationError(_("passworr dont have uppercase letters"),
+            raise ValidationError(_("password dont have uppercase letters"),
                                   code="no uppercase",
                                   )
         if password.isdigit() == True:
-            raise ValidationError(_("password has no letter"),
-                                  code="no letter",
+            raise ValidationError(_("password should not be numbers alone"),
+                                  code="no letters",
                                   )
         if password.isalpha() ==True:
-            raise ValidationError(_("password should not be letter alone"),
+            raise ValidationError(_("password should not be letters alone"),
                                   code="no numbers",
                                   )
     def get_help_text(self):
