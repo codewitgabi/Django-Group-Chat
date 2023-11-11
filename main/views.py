@@ -115,6 +115,7 @@ def create_group(request):
 #		
 #	return render(request, "signup.html")
 
+#signup form 
 def signup(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
