@@ -11,10 +11,6 @@ class PasswordCombinationValidator:
             raise ValidationError(_("password dont have uppercase letters"),
                                   code="no uppercase",
                                   )
-        if password.isdigit() == True:
-            raise ValidationError(_("password should not be numbers alone"),
-                                  code="no letters",
-                                  )
         if password.isalpha() ==True:
             raise ValidationError(_("password should not be letters alone"),
                                   code="no numbers",

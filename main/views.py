@@ -124,7 +124,7 @@ def signup(request):
             return redirect("signin")
     else:
         form = CustomUserCreationForm()
-    return render(request,"signup1.html",{"form":form})
+    return render(request,"signup.html",{"form":form})
 
 @redirect_auth_user
 def signin(request):
