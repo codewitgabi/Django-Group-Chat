@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,7 +72,6 @@ ASGI_APPLICATION = "Chat.asgi.application"
 WSGI_APPLICATION = 'Chat.wsgi.application'
 
 
-# Database
 """
 DATABASES = {
 	"default": {
@@ -85,7 +84,7 @@ DATABASES = {
 	}
 }
 """
-
+# Database
 DATABASES = {
     'default': dj_database_url.parse(
         os.environ.get("DATABASE_URL"),
@@ -94,27 +93,39 @@ DATABASES = {
     ),
 }
 
-#DATABASES = {
-#	"default": {
-#		'ENGINE': 'django.db.backends.sqlite3',
-#		'NAME': BASE_DIR / 'db.sqlite3'
-#	}
-#}
+"""DATABASES = {
+	"default": {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': BASE_DIR / 'db.sqlite3'
+	}
+}"""
 
 # Password validation
 
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'OPTIONS': {
+            'user_attributes':{
+                'username','first_name','last_name',
+                },
+            'max_similarity':0.5,
+            }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 10,
+            },
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+    {
+        'NAME': 'main.custom_validators.PasswordCombinationValidator',
     },
 ]
 

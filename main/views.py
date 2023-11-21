@@ -4,6 +4,7 @@ from django.contrib.auth.models import User , auth
 from django.contrib import messages
 from .models import Category, Group, Message
 from django.db.models import Q, Count
+from .forms import CustomUserCreationForm
 
 
 def redirect_auth_user(func):
@@ -89,31 +90,42 @@ def create_group(request):
 	return render(request, "create-group.html", context)
 	
 
-@redirect_auth_user
-def signup(request):
-	if request.method == "POST":
-		username = request.POST.get("username")
-		email = request.POST.get("email")
-		password1 = request.POST.get("password1")
-		password2 = request.POST.get("password2")
-		
-		if password1 == password2:
-			if User.objects.filter(username=username).exists():
-				messages.error(request, "User with given username already exists")
-			elif User.objects.filter(email=email).exists():
-				messages.error(request, "User with given email already exists")
-			else:
-				User.objects.create_user(
-					username=username,
-					email=email,
-					password=password1)
-				messages.info(request, f"Account for {username} created successfully!!")
-				return redirect("signin")
-		else:
-			messages.error(request, "Passwords do not match")
-		
-	return render(request, "signup.html")
+#@redirect_auth_user
+#def signup(request):
+#	if request.method == "POST":
+#		username = request.POST.get("username")
+#		email = request.POST.get("email")
+#		password1 = request.POST.get("password1")
+#		password2 = request.POST.get("password2")
+#		
+#		if password1 == password2:
+#			if User.objects.filter(username=username).exists():
+#				messages.error(request, "User with given username already exists")
+#			elif User.objects.filter(email=email).exists():
+#				messages.error(request, "User with given email already exists")
+#			else:
+#				User.objects.create_user(
+#					username=username,
+#					email=email,
+#					password=password1)
+#				messages.info(request, f"Account for {username} created successfully!!")
+#				return redirect("signin")
+#		else:
+#			messages.error(request, "Passwords do not match")
+#		
+#	return render(request, "signup.html")
 
+#signup form 
+def signup(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("signin")
+    else:
+        form = CustomUserCreationForm()
+    return render(request,"signup.html",{"form":form})
 
 @redirect_auth_user
 def signin(request):

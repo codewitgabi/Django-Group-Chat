@@ -7,21 +7,47 @@
         {% for message in messages %}
         	<div class="error-msg">{{ message }}</div>
         {% endfor %}
-        <form action="" method="post">
+	
+	<div class="error-texts">
+        {% if form.errors %}
+          {% for error in form.errors.values %}
+            {{ error }}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+        <!--<form action="" method="post">
         {% csrf_token %}
-            <label>Username<span>*</span></label>
-            <input type="text" name="username" placeholder="Username" required>
+	<label>Username<span>*</span></label>
+           <input type="text" name="username" placeholder="Username" required>
             <label>Email<span>*</span></label>
             <input type="email" name="email" placeholder="Email" required>
             <label>Password<span>*</span></label>
             <input type="password" name="password1" placeholder="Password" required>
             <label>Confirm Password<span>*</span></label>
-            <input type="password" name="password2" placeholder="Confirm Password" required>
+	    <input type="password" name="password2" placeholder="Confirm Password" required>-->
+	    <form id="auth-form" method="post">
+      {% csrf_token %}
+            {{ form.email }}
+	    <br>
+	    <br>
+            {{ form.username }}
+	    <br>
+	    <br>
+            <div class="password-field">
+                {{ form.password1 }}
+                <i class="bi bi-eye-slash" id="eye"></i>
+            </div>
+	    <br>
+	    <div class="password-field">
+                {{ form.password2 }}                                                  <i class="bi bi-eye-slash" id="eye"></i>
+            </div>
+
             <button class="signup-btn">Sign Up</button>
             <div class="form-footer">
                 <span class="b">Already have an account?</span>
                 <a class="b" href="{% url 'signin' %}">Sign In</a>
-            </div>
+	    </div>
         </form>
         
 {% endblock %}
